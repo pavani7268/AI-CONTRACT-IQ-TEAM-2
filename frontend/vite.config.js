@@ -11,6 +11,11 @@ export default defineConfig({
         target: 'http://localhost:8000',
         changeOrigin: true,
         secure: false,
+        configure: (proxy, _options) => {
+          proxy.on('error', (err, _req, _res) => {
+            console.log('Proxy error — is your backend running on port 8000?', err.message);
+          });
+        },
       },
     },
   },
@@ -19,4 +24,3 @@ export default defineConfig({
     sourcemap: false,
   },
 });
-

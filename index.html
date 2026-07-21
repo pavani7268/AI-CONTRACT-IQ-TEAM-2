@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI Legal Contract IQ</title>
+    <link rel="stylesheet" href="style.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">
+                <i class="fas fa-scale-balanced"></i>
+                <span>AI Contract <span class="highlight">IQ</span></span>
+            </div>
+            <p class="tagline">Intelligent Legal Contract Analysis Platform</p>
+        </div>
+    </header>
+
+    <!-- Main Layout -->
+    <main class="main-container">
+
+        <!-- Input Section -->
+        <section class="input-section glass" id="inputSection">
+            <div class="section-header">
+                <i class="fas fa-file-contract"></i>
+                <h2>Paste Your Contract</h2>
+            </div>
+            <div class="input-area">
+                <textarea id="contractInput" placeholder="Paste the full contract text here..."></textarea>
+                <div class="input-actions">
+                    <div class="file-upload">
+                        <label for="fileUpload" class="btn-secondary">
+                            <i class="fas fa-upload"></i> Upload File
+                        </label>
+                        <input type="file" id="fileUpload" accept=".txt,.pdf,.docx" />
+                        <span id="fileName" class="file-name">No file chosen</span>
+                    </div>
+                    <button id="analyzeBtn" class="btn-primary">
+                        <i class="fas fa-microchip"></i> Analyze Contract
+                    </button>
+                </div>
+            </div>
+            <div class="sample-section">
+                <button id="loadSampleBtn" class="btn-link">
+                    <i class="fas fa-flask"></i> Load Sample Contract
+                </button>
+            </div>
+        </section>
+
+        <!-- Loading -->
+        <section class="loading-section hidden" id="loadingSection">
+            <div class="loader">
+                <div class="spinner"></div>
+                <div class="loader-text">
+                    <h3>Analyzing Contract</h3>
+                    <div class="loader-steps">
+                        <span class="step active">Reading</span>
+                        <span class="step">Extracting</span>
+                        <span class="step">Analyzing</span>
+                        <span class="step">Scoring</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Results -->
+        <section class="results-section hidden" id="resultsSection">
+
+            <!-- Executive Summary -->
+            <div class="result-card glass" id="summaryCard">
+                <div class="card-header" onclick="toggleCard('summaryBody')">
+                    <div><i class="fas fa-list-check"></i> Contract Summary</div>
+                    <i class="fas fa-chevron-down toggle-icon"></i>
+                </div>
+                <div class="card-body" id="summaryBody"></div>
+            </div>
+
+            <!-- Clause Extraction -->
+            <div class="result-card glass" id="clausesCard">
+                <div class="card-header" onclick="toggleCard('clausesBody')">
+                    <div><i class="fas fa-gavel"></i> Clause Extraction</div>
+                    <i class="fas fa-chevron-down toggle-icon"></i>
+                </div>
+                <div class="card-body" id="clausesBody"></div>
+            </div>
+
+            <!-- Risk Detection -->
+            <div class="result-card glass" id="risksCard">
+                <div class="card-header" onclick="toggleCard('risksBody')">
+                    <div><i class="fas fa-triangle-exclamation"></i> Risk Detection</div>
+                    <i class="fas fa-chevron-down toggle-icon"></i>
+                </div>
+                <div class="card-body" id="risksBody"></div>
+            </div>
+
+            <!-- Missing Clauses -->
+            <div class="result-card glass" id="missingCard">
+                <div class="card-header" onclick="toggleCard('missingBody')">
+                    <div><i class="fas fa-circle-exclamation"></i> Missing Clauses Analysis</div>
+                    <i class="fas fa-chevron-down toggle-icon"></i>
+                </div>
+                <div class="card-body" id="missingBody"></div>
+            </div>
+
+            <!-- Compliance Score -->
+            <div class="result-card glass" id="complianceCard">
+                <div class="card-header" onclick="toggleCard('complianceBody')">
+                    <div><i class="fas fa-chart-pie"></i> Compliance Score</div>
+                    <i class="fas fa-chevron-down toggle-icon"></i>
+                </div>
+                <div class="card-body" id="complianceBody"></div>
+            </div>
+
+            <!-- Key Obligations -->
+            <div class="result-card glass" id="obligationsCard">
+                <div class="card-header" onclick="toggleCard('obligationsBody')">
+                    <div><i class="fas fa-clipboard-list"></i> Key Obligations</div>
+                    <i class="fas fa-chevron-down toggle-icon"></i>
+                </div>
+                <div class="card-body" id="obligationsBody"></div>
+            </div>
+
+            <!-- Important Dates -->
+            <div class="result-card glass" id="datesCard">
+                <div class="card-header" onclick="toggleCard('datesBody')">
+                    <div><i class="fas fa-calendar"></i> Important Dates</div>
+                    <i class="fas fa-chevron-down toggle-icon"></i>
+                </div>
+                <div class="card-body" id="datesBody"></div>
+            </div>
+
+            <!-- Financial Terms -->
+            <div class="result-card glass" id="financialCard">
+                <div class="card-header" onclick="toggleCard('financialBody')">
+                    <div><i class="fas fa-coins"></i> Financial Terms</div>
+                    <i class="fas fa-chevron-down toggle-icon"></i>
+                </div>
+                <div class="card-body" id="financialBody"></div>
+            </div>
+
+            <!-- Metadata -->
+            <div class="result-card glass" id="metadataCard">
+                <div class="card-header" onclick="toggleCard('metadataBody')">
+                    <div><i class="fas fa-info-circle"></i> Contract Metadata</div>
+                    <i class="fas fa-chevron-down toggle-icon"></i>
+                </div>
+                <div class="card-body" id="metadataBody"></div>
+            </div>
+
+            <!-- Recommendations -->
+            <div class="result-card glass" id="recommendationsCard">
+                <div class="card-header" onclick="toggleCard('recommendationsBody')">
+                    <div><i class="fas fa-lightbulb"></i> Executive Recommendations</div>
+                    <i class="fas fa-chevron-down toggle-icon"></i>
+                </div>
+                <div class="card-body" id="recommendationsBody"></div>
+            </div>
+
+            <!-- Q&A Knowledge Base -->
+            <div class="result-card glass" id="qaCard">
+                <div class="card-header" onclick="toggleCard('qaBody')">
+                    <div><i class="fas fa-brain"></i> Knowledge Base (Q&A Support)</div>
+                    <i class="fas fa-chevron-down toggle-icon"></i>
+                </div>
+                <div class="card-body" id="qaBody"></div>
+            </div>
+
+            <!-- Export -->
+            <div class="export-area">
+                <button id="exportBtn" class="btn-primary"><i class="fas fa-download"></i> Export JSON</button>
+                <button id="exportPdfBtn" class="btn-secondary"><i class="fas fa-file-pdf"></i> Export PDF Summary</button>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>AI Contract IQ &mdash; Intelligent Legal Contract Analysis &bull; Not a substitute for professional legal advice.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
